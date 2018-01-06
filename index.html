@@ -76,8 +76,9 @@
     <div class="container">
 
       <div id="logo" class="pull-left">
-        <a href="#hero"><img src="img/logo.png" alt="" title="" /></img></a>
-        <!-- Uncomment below if you prefer to use a text image -->
+        LVH Logo
+        <!--  <a href="#hero"><img src="img/logo.png" alt="" title="" /></img></a>
+        Uncomment below if you prefer to use a text image -->
         <!--<h1><a href="#hero">Header 1</a></h1>-->
       </div>
 
@@ -458,10 +459,10 @@
                 <div class="validation"></div>
               </div>
               <div class="form-group">
-                <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                <textarea id="email-textarea" class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
                 <div class="validation"></div>
               </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
+              <div class="text-center"><button id="send_email" type="submit">Send Message</button></div>
             </form>
           </div>
         </div>
@@ -478,7 +479,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="copyright">
-            &copy; Copyright <strong>Imperial Theme</strong>. All Rights Reserved
+            &copy; Copyright <strong>xyz company inc</strong>. All Rights Reserved
           </div>
           <div class="credits">
           </div>
@@ -504,6 +505,24 @@
   <script src="js/custom.js"></script>
 
   <script src="contactform/contactform.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var from,to,subject,text;
+      $("#send_email").click(function()
+      {
+        to="enquiries@lvholdings.co.uk";
+        subject="Customer Enquiry";
+        name=document.getElementById("name").value;
+        text=document.getElementById("email-textarea").value;
+        email=document.getElementById("email").value;
+        phone=document.getElementById("phone").value;
+        $.get("http://35.177.178.100:3000/send",
+        {to:to,subject:subject,text:text,name:name,email:email,phone:phone},
+        function(data){ if(data=="sent"){ console.log("E-mail sent");
+        } });
+      });
+      });
+  </script>
 
 
 </body>
